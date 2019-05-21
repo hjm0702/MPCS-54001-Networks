@@ -49,14 +49,14 @@ def main():
 
 	while seq < counter:
 		seq = seq+1
-		threading.Timer(period, main).start()
+		threading.Timer(period, main).start() #Key
 		client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-		client_socket.settimeout(time_out)
+		client_socket.settimeout(time_out) #Key
 		raw_message = "PING {} {}\r\n".format(seq, time.time())
 		message = raw_message.encode()
 		addr = (server_ip, server_port)
 		start = time.time()
-		client_socket.sendto(message,addr)
+		client_socket.sendto(message,addr) 
 		total_packets += 1
 		
 		#Receive a message
@@ -76,11 +76,11 @@ def main():
 						
 			if packets_received == counter:
 				summary()
-		except socket.timeout:
+		except socket.timeout: #Key
 			packets_dropped += 1
 			if counter == packets_received+packets_dropped:
 				summary()
-		time.sleep(period)
+		time.sleep(period) #Key
 
 #Summarize stats
 def summary():
